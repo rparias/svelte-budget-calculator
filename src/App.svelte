@@ -5,9 +5,13 @@
 	import expensesData from './expenses';
 
 	let expenses = [...expensesData];
+
+	function removeExpense(id) {
+		expenses = expenses.filter(item => item.id !== id);
+	}
 </script>
 
 <Navbar />
 <main class="content">
-	<ExpenseList {expenses}/>
+	<ExpenseList {expenses} {removeExpense}/>
 </main>
