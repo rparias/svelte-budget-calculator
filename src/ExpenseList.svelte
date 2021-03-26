@@ -1,8 +1,11 @@
 <script>
+    import { getContext } from "svelte";
     import SectionTitle from "./Title.svelte";
     import Expense from "./Expense.svelte";
 
     export let expenses = [];
+
+    const clearExpenses = getContext('clear');
 </script>
 
 <section>
@@ -11,9 +14,14 @@
         {#each expenses as expense, index}
             <Expense {...expense} />
         {:else}
-            <h3>Currently you have no expenses</h3>
+            <h3>No expenses added to the list</h3>
         {/each}
     </ul>
+    {#if expenses.length > 0}
+        <button type="button" class="btn btn-primary btn-block" on:click={clearExpenses}>
+            Clear Expenses
+        </button>
+    {/if}
 </section>
 
 <style>

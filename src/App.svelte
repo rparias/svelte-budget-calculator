@@ -11,7 +11,12 @@
 		expenses = expenses.filter(item => item.id !== id);
 	}
 
+	function clearExpenses() {
+		expenses = [];
+	}
+
 	setContext('remove', removeExpense);
+	setContext('clear', clearExpenses);
 </script>
 
 <Navbar />
