@@ -1,6 +1,7 @@
 <script>
 	import { setContext } from "svelte";
 	import Navbar from "./Navbar.svelte";
+	import Button from "./Button.svelte";
 	import ExpenseList from "./ExpenseList.svelte";
 
 	import expensesData from "./expenses";
@@ -16,10 +17,12 @@
 	}
 
 	setContext('remove', removeExpense);
-	setContext('clear', clearExpenses);
 </script>
 
 <Navbar />
 <main class="content">
 	<ExpenseList {expenses} />
+	{#if expenses.length > 0}
+		<Button title="Clear Expenses" onClick={clearExpenses} />
+    {/if}
 </main>
