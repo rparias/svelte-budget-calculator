@@ -4,6 +4,7 @@
 	import Button from "./Button.svelte";
 	import Totals from "./Totals.svelte";
 	import ExpenseList from "./ExpenseList.svelte";
+	import ExpenseForm from "./ExpenseForm.svelte";
 
 	import expensesData from "./expenses";
 
@@ -26,6 +27,7 @@
 
 <Navbar />
 <main class="content">
+	<ExpenseForm />
 	<Totals total={total.toFixed(2)} />
 	<ExpenseList {expenses} />
 	{#if expenses.length > 0}
