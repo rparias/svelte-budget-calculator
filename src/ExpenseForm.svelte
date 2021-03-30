@@ -5,11 +5,17 @@
     let amount = null;
 
     $: isEmpty = !name || !amount;
+
+    function handleSubmit() {
+        console.log({name, amount});
+        name = '';
+        amount = null;
+    }
 </script>
 
 <section class="form">
     <Title title="Add Expense" />
-    <form class="expense-form">
+    <form class="expense-form" on:submit|preventDefault={handleSubmit}>
         <div class="form-control">
             <label for="name">Name</label>
             <input id="name" type="text" bind:value={name}>
