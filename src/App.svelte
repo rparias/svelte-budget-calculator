@@ -9,6 +9,10 @@
 	import expensesData from "./expenses";
 
 	let expenses = [...expensesData];
+
+	let setId = null;
+	let setName = '';
+	let setAmount = null;
 	
 	$: total = expenses.reduce((accumulator, currentExpense) => {
 		return accumulator + currentExpense.amount;
@@ -32,7 +36,16 @@
 		expenses = expenses;
 	}
 
+	function setModifiedExpense(id) {
+		let expense = expenses.filter(item => item.id === id);
+		console.log('expense:', expense);
+		setId = expense.id;
+		setName = expense.name;
+		setAmount = expense.amount;
+	}
+
 	setContext('remove', removeExpense);
+	setContext('modify', setModifiedExpense);
 </script>
 
 <Navbar />
