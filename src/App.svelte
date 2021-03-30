@@ -22,12 +22,22 @@
 		expenses = [];
 	}
 
+	function addExpense({name, amount}) {
+		let expense = {
+            id: Math.random() * Date.now(),
+            name,
+            amount,
+        };
+		expenses.unshift(expense);
+		expenses = expenses;
+	}
+
 	setContext('remove', removeExpense);
 </script>
 
 <Navbar />
 <main class="content">
-	<ExpenseForm />
+	<ExpenseForm {addExpense}/>
 	<Totals total={total.toFixed(2)} />
 	<ExpenseList {expenses} />
 	{#if expenses.length > 0}
