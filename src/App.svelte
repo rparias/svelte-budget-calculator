@@ -13,6 +13,8 @@
 	let setId = null;
 	let setName = '';
 	let setAmount = null;
+
+	let isFormOpen = false;
 	
 	$: isEditing = setId ? true : false;
 	$: total = expenses.reduce((accumulator, currentExpense) => {
@@ -42,10 +44,24 @@
 		setId = expense.id;
 		setName = expense.name;
 		setAmount = expense.amount;
+		showForm();
 	}
 
 	function editExpense ({name, amount}) {
 		expenses = expenses.map(item => item.id === setId ? {...item, name, amount} : {...item});
+		clearForm();
+	}
+
+	function showForm() {
+		isFormOpen = true;
+	}
+
+	function hideForm() {
+		isFormOpen = false;
+		clearForm();
+	}
+
+	function clearForm() {
 		setId = null;
 		setName = '';
 		setAmount = null;
@@ -55,9 +71,11 @@
 	setContext('modify', setModifiedExpense);
 </script>
 
-<Navbar />
+<Navbar {showForm} />
 <main class="content">
-	<ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense}/>
+	{#if isFormOpen}
+		<ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense} {hideForm}/>	
+	{/if}
 	<Totals total={total.toFixed(2)} />
 	<ExpenseList {expenses} />
 	{#if expenses.length > 0}

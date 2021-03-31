@@ -8,6 +8,7 @@
     export let amount = null;
     export let isEditing;
     export let editExpense;
+    export let hideForm;
 
     $: isEmpty = !name || !amount;
 
@@ -37,6 +38,6 @@
             <p class="form-empty">Please fill out all form fields</p>
         {/if}
         <Button title={isEditing ? 'Update Expense' : 'Add Expense'} styleClass="btn btn-block" typeButton="submit" isDisabled={isEmpty}/>
-        <Button title="Close" styleClass="close-btn" iconClass="fas fa-times" />
+        <Button title="Close" styleClass="close-btn" iconClass="fas fa-times" onClick={hideForm} />
     </form>
 </section>
