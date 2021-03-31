@@ -37,8 +37,7 @@
 	}
 
 	function setModifiedExpense(id) {
-		let expense = expenses.filter(item => item.id === id);
-		console.log('expense:', expense);
+		let expense = expenses.find(item => item.id === id);
 		setId = expense.id;
 		setName = expense.name;
 		setAmount = expense.amount;
