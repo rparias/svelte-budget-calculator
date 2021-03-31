@@ -1,5 +1,5 @@
 <script>
-	import { setContext, onMount } from "svelte";
+	import { setContext, onMount, afterUpdate } from "svelte";
 	import Navbar from "./Navbar.svelte";
 	import Button from "./Button.svelte";
 	import Totals from "./Totals.svelte";
@@ -24,12 +24,10 @@
 
 	function removeExpense(id) {
 		expenses = expenses.filter(item => item.id !== id);
-		setLocalStorage();
 	}
 
 	function clearExpenses() {
 		expenses = [];
-		setLocalStorage();
 	}
 
 	function addExpense({name, amount}) {
@@ -40,7 +38,6 @@
         };
 		expenses.unshift(expense);
 		expenses = expenses;
-		setLocalStorage();
 	}
 
 	function setModifiedExpense(id) {
@@ -54,7 +51,6 @@
 	function editExpense ({name, amount}) {
 		expenses = expenses.map(item => item.id === setId ? {...item, name, amount} : {...item});
 		clearForm();
-		setLocalStorage();
 	}
 
 	function showForm() {
@@ -83,7 +79,12 @@
 		expenses = localStorage.getItem('expenses')
 		? JSON.parse(localStorage.getItem('expenses'))
 		: [];
-	})
+	});
+
+	afterUpdate(() => {
+		//This will be executed after each update on the App, needed to be careful
+		setLocalStorage();
+	});
 </script>
 
 <Navbar {showForm} />
