@@ -1,4 +1,19 @@
 <script>
+    import {onMount, onDestroy, beforeUpdate, afterUpdate} from 'svelte';
+    onMount(() => {
+        console.log('form has mounted');
+    });
+    onDestroy(() => {
+        console.log('form has destroyed');
+    });
+    beforeUpdate(() => {
+        console.log('before update');
+    });
+    afterUpdate(() => {
+        console.log('after update');
+    });
+
+
     import Title from './Title.svelte';
     import Button from './Button.svelte';
 
