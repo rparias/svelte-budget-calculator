@@ -4,20 +4,26 @@
 
     export let addExpense;
 
-    let name = '';
-    let amount = null;
+    export let name = '';
+    export let amount = null;
+    export let isEditing;
+    export let editExpense;
 
     $: isEmpty = !name || !amount;
 
     function handleSubmit() {
-        addExpense({name, amount});
+        if (isEditing) {
+            editExpense({name, amount});
+        } else {
+            addExpense({name, amount});
+        }
         name = '';
         amount = null;
     }
 </script>
 
 <section class="form">
-    <Title title="Add Expense" />
+    <Title title={isEditing ? 'Update Expense' : 'Add Expense'} />
     <form class="expense-form" on:submit|preventDefault={handleSubmit}>
         <div class="form-control">
             <label for="name">Name</label>
@@ -30,7 +36,7 @@
         {#if isEmpty}
             <p class="form-empty">Please fill out all form fields</p>
         {/if}
-        <Button title="Add Expense" styleClass="btn btn-block" typeButton="submit" isDisabled={isEmpty}/>
+        <Button title={isEditing ? 'Update Expense' : 'Add Expense'} styleClass="btn btn-block" typeButton="submit" isDisabled={isEmpty}/>
         <Button title="Close" styleClass="close-btn" iconClass="fas fa-times" />
     </form>
 </section>

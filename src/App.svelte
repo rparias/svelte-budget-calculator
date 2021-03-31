@@ -14,6 +14,7 @@
 	let setName = '';
 	let setAmount = null;
 	
+	$: isEditing = setId ? true : false;
 	$: total = expenses.reduce((accumulator, currentExpense) => {
 		return accumulator + currentExpense.amount;
 	}, 0);
@@ -43,13 +44,17 @@
 		setAmount = expense.amount;
 	}
 
+	function editExpense ({name, amount}) {
+		console.log({name, amount});
+	}
+
 	setContext('remove', removeExpense);
 	setContext('modify', setModifiedExpense);
 </script>
 
 <Navbar />
 <main class="content">
-	<ExpenseForm {addExpense}/>
+	<ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense}/>
 	<Totals total={total.toFixed(2)} />
 	<ExpenseList {expenses} />
 	{#if expenses.length > 0}
