@@ -45,7 +45,10 @@
 	}
 
 	function editExpense ({name, amount}) {
-		console.log({name, amount});
+		expenses = expenses.map(item => item.id === setId ? {...item, name, amount} : {...item});
+		setId = null;
+		setName = '';
+		setAmount = null;
 	}
 
 	setContext('remove', removeExpense);
