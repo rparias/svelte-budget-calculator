@@ -5,6 +5,7 @@
 	import Totals from "./Totals.svelte";
 	import ExpenseList from "./ExpenseList.svelte";
 	import ExpenseForm from "./ExpenseForm.svelte";
+	import Modal from "./Modal.svelte";
 
 	import expensesData from "./expenses";
 
@@ -90,7 +91,9 @@
 <Navbar {showForm} />
 <main class="content">
 	{#if isFormOpen}
-		<ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense} {hideForm}/>	
+		<Modal>
+			<ExpenseForm {addExpense} name={setName} amount={setAmount} {isEditing} {editExpense} {hideForm}/>	
+		</Modal>
 	{/if}
 	<Totals total={total.toFixed(2)} />
 	<ExpenseList {expenses} />
